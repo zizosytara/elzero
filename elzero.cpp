@@ -1,3 +1,4 @@
+//recursion can get back history like git log
 #include<iostream>
 using namespace std;
 struct Node{
@@ -5,13 +6,12 @@ struct Node{
     Node* next;
 };
 Node* head=NULL;
-void Insert(int num){
+
+Node* Insert(Node* head,int num){
 Node* newNode= new Node();
 newNode->data=num;
 if(head==NULL){
     head=newNode;
-    newNode->next=NULL;
-    return;
 }
 Node*temp=head;
 while(temp->next!=NULL){
@@ -19,20 +19,33 @@ while(temp->next!=NULL){
 }
 temp->next=newNode;
 newNode->next=NULL;
+return head;
 }
 
-void insertRec(int num){
-Node* newNode= new Node();
-newNode->data=num;
-
+void Reverse(Node*current){
+ if(current->next == NULL){
+    head=current;
+    return;
+}
+Reverse(current->next);//recursive call
+Node* temp=current->next;
+temp->next=current;
+current->next=NULL;
 }
 
-void Display(){
-    Node*current=head;
-    while(current!=NULL){
-        cout<<current->data<<'\t';
-        current=current->next;
-    }
+
+void revDisplay(Node* current){
+ if(current == NULL){
+    return;
+ }
+ revDisplay(current->next);//recursive call
+ cout<<current->data<<'\t';//print value
+}
+
+void Display(Node* current){
+ if(current == NULL)return;
+ cout<<current->data<<'\t';//print value
+ Display(current->next);//recursive call
 }
 void Delete(){
     Node*current=head;
@@ -49,8 +62,22 @@ void Delete(){
 
 
 int main (){
+    
+    head=Insert(head,1);
+    head=Insert(head,2);
+    head=Insert(head,3);
+    Display(head);
 
-    Display();
+    cout<<'\n';
+
+    revDisplay(head);
+
+    Reverse(head);
+    cout<<'\n';
+    Display(head);
+    cout<<'\n';
+    revDisplay(head);
+
     Delete();
     return 0;
 }
