@@ -51,15 +51,17 @@ void Display(){
 
 void Reverse(){
 Node*current=head;
-Node*after=current->next;
-Node*prev=NULL;
-current->next=prev;
+Node*prev=current->next;
+Node*after=prev->next;
+
+current->next=NULL;
 while(current !=NULL){
-    after->next=current;
-    current=after;
+    prev->next=current;
+    current=prev;
+    prev=after;
     after=after->next;
 }
-head=after;
+head=current;
 cout<<"\nAfter reverse\n";
 }
 int main (){
