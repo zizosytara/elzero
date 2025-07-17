@@ -4,13 +4,14 @@ struct Node{
       int data;
       Node* next;
 };
+int Count();
 void Delete(int order);
-
 Node* head=NULL;
 void Insert(int value,int order){
 Node* newNode=new Node();
 newNode->data=value;
 newNode->next=NULL;
+
 if(order==1){
     newNode->next=head;
     head=newNode;
@@ -34,35 +35,29 @@ int Count(){
 }
 void Display(){
     Node* current=head;
-    int value,order;
-        if(head==NULL){
-            cout<<"Empty List\n";
-            
-        }
-        else{ current=head;
             while(current!=NULL){
              cout<<current->data<<'\t';
              current=current->next;
              
             }
-        }
-    cout<<"\nThe number of Nodes = "<<Count()<<endl;
+        
+    cout<<"\nThe number of Nodes = "<<Count()<<'\n';
+  
 }
 
-void Reverse(){
-Node*current=head;
-Node*prev=current->next;
-Node*after=prev->next;
+Node* Reverse(){
+Node *current,*nextNode,*prev;
+current=head;
+prev=nextNode=NULL;
 
-current->next=NULL;
-while(current !=NULL){
-    prev->next=current;
-    current=prev;
-    prev=after;
-    after=after->next;
+while(current!=NULL){
+    nextNode=current->next;
+    current->next=prev;
+    prev=current;
+    current=nextNode;
 }
-head=current;
-cout<<"\nAfter reverse\n";
+head=prev;
+return head;
 }
 int main (){
 Insert(1,1);
@@ -70,7 +65,6 @@ Insert(2,2);
 Insert(3,3);
 Insert(4,3);
 Display();
-cout<<endl;
 Reverse();
 Display();
 Delete(2);

@@ -1,32 +1,56 @@
 #include<iostream>
 using namespace std;
-//method1
-void voidRepeat( int times,string temp){
-   if(times==0)
+struct Node{
+    int data;
+    Node* next;
+};
+Node* head=NULL;
+void Insert(int num){
+Node* newNode= new Node();
+newNode->data=num;
+if(head==NULL){
+    head=newNode;
+    newNode->next=NULL;
     return;
-
-   else
-   cout<<temp;
-
-   voidRepeat(times-1,temp);
 }
-//method 2
-string stringRepeat(int times,string temp,string sep){
-    if(times==0)
-    return "";
+Node*temp=head;
+while(temp->next!=NULL){
+    temp=temp->next;
+}
+temp->next=newNode;
+newNode->next=NULL;
+}
 
-    else 
-    return temp+sep+stringRepeat(times-1,temp,sep);
-}
-string cond(int times,string temp ,string sep){
-    
-}
-//mathod 3
-string elzero(int times, string temp, string sep){
+void insertRec(int num){
+Node* newNode= new Node();
+newNode->data=num;
 
 }
+
+void Display(){
+    Node*current=head;
+    while(current!=NULL){
+        cout<<current->data<<'\t';
+        current=current->next;
+    }
+}
+void Delete(){
+    Node*current=head;
+    Node*temp;
+    while(current!=NULL){
+        temp=current->next;
+        delete current;
+        current=temp;
+    }
+    head=NULL;
+}
+
+
+
+
 int main (){
 
-cout<<stringRepeat(3,"ziad","#") ;   
+    Display();
+    Delete();
     return 0;
 }
