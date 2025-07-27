@@ -22,6 +22,22 @@ newNode->next=NULL;
 return head;
 }
 
+void Insert(int num){
+Node *newNode=new Node();
+
+newNode->data=num;
+if(head==NULL){
+    head=newNode;
+}
+Node *temp=head;
+while(temp->next==NULL){
+    temp=temp->next;
+}
+temp->next=newNode;
+newNode->next=NULL;
+
+}
+
 void Reverse(Node*current){
  if(current->next == NULL){
     head=current;
@@ -32,7 +48,9 @@ Node* temp=current->next;
 temp->next=current;
 current->next=NULL;
 }
+void Reverse(){
 
+}
 
 void revDisplay(Node* current){
  if(current == NULL){
@@ -62,7 +80,6 @@ void Delete(){
 
 
 int main (){
-    
     head=Insert(head,1);
     head=Insert(head,2);
     head=Insert(head,3);
