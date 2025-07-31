@@ -5,52 +5,41 @@ struct Node {
       Node *prev, *next;
 };
 
+int Count();
 Node *head=NULL;
+
 void insert(int value, int position){
+    if(position < 1 || position > Count()+1){
+        cout<<"\n Out of range\n";
+        return;
+    }
+    Node *newNode = new Node(); // in C :  struct Node *newNode = (*Node) malloc(sizeof(Node));
+    newNode->data = value;
+    newNode->prev = NULL;
+    newNode->next = NULL;
     if(head == NULL){
-        if(position != 1){
-          cout<<"\nOut of range !\n ";
-          return;
-        }
-        Node *newNode = new Node(); // in C :  struct Node *newNode = (*Node) malloc(sizeof(Node));
-        newNode->data = value;
         head = newNode;
-        newNode->prev = NULL;
-        newNode->next = NULL;
+        return;
     }
     //------------in start-----------//
-    Node *newNode = new Node();
-    newNode->data = value;
-    newNode->prev = NULL;
-    newNode->next = head;
-    head->prev = newNode;
-    head = newNode;
-    //-------------in mid------------//
-    Node *newNode = new Node();
-    newNode->data = value;
-    newNode->prev = NULL;
-    newNode->next = NULL;
+    if(position == 1){
+        newNode->next = head;
+        head->prev = newNode;
+        head = newNode;// forget to place head to new
+        return;
+    }
+    //-------------in mid and last------------//
     Node *temp = head;
-    for(int i = position-1 ; i > 1 ; i--){
+    for(int i = 1; i < position-1 && temp != NULL; i++){
         temp = temp->next;
     }
     newNode->prev = temp;
-    newNode->next = temp->next;
-    (temp->next)->prev = newNode;//count function
-    temp->next = newNode;
-    //-------------in last-----------//
-    Node *newNode = new Node();
-    newNode->data = value;
-    newNode->prev = NULL;
-    newNode->next = NULL;
-    Node *temp = head;
-    for(int i = position-1 ; i > 1 ; i--){
-        temp = temp->next;
+    if(newNode->next != NULL){
+      (newNode->next)->prev = newNode;
     }
-    newNode->prev = temp;
     newNode->next = temp->next;
     temp->next = newNode;
-    
+
 }
 void insertStart(int value){
     Node *newNode = new Node();
@@ -83,6 +72,16 @@ void insertBack(int value){
     newNode->prev = temp;
     newNode->next = NULL;
 }
+
+void Delete(){
+    Node *current = head;
+    while(head != NULL){
+        current = head->next;
+        delete head;
+        head = current;
+    }
+}
+
 int Count(){
 Node *counter = head;
 int numberNodes = 1;
