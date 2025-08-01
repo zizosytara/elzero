@@ -81,6 +81,43 @@ void Delete(){
         head = current;
     }
 }
+void Delete(int position){
+    if(head == NULL || position < 1 || position > Count()){
+      cout<<"\nInvalid position\n";
+      return;
+    }
+    Node *current = head;
+    //----------in start----------------//
+    if(position == 1){
+        head = current->next;
+        if(head != NULL){
+            head->prev = NULL;
+        }
+        current->next = NULL;
+        delete current;
+        return;
+    }
+    //-------------in mid or end-------------//
+    for(int i = 1 ; i < position ; i++){
+        current = current->next;
+    }
+    if(current->next != NULL){
+        (current->next)->prev = current->prev;  
+    }
+    if(current->prev != NULL){
+        (current->prev)->next = current->next;
+    }
+    delete current;
+ 
+}
+
+void Reverse(){
+     Node *current = head;
+
+}
+void Reverse(int i){
+    
+}
 
 int Count(){
 Node *counter = head;
@@ -97,6 +134,6 @@ void Display(){
 }
 int main(){
 
-
+Delete();
     return 0;
 }
