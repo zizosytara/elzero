@@ -8,9 +8,9 @@ struct Node {
 int Count();
 Node *head=NULL;
 
-void insert(int value, int position){
+void insert(int value, int position){//there is a bug
     if(position < 1 || position > Count()+1){
-        cout<<"\n Out of range\n";
+        cout<<"\n ["<<value<<"] is out of range \n";
         return;
     }
     Node *newNode = new Node(); // in C :  struct Node *newNode = (*Node) malloc(sizeof(Node));
@@ -112,28 +112,46 @@ void Delete(int position){
 }
 
 void Reverse(){
-     Node *current = head;
-
+    
 }
 void Reverse(int i){
     
 }
-
-int Count(){
-Node *counter = head;
-int numberNodes = 1;
-while(counter->next != NULL){
-    counter = counter->next;
-    numberNodes++;
-}
-return numberNodes;
-}
 void Display(){
     Node *current = head;
+    while(current != NULL){
+        cout<<current->data<<'\t';
+        current = current->next;   
+    }
+    cout<<endl;
+}
+
+int Count(){
+int numberNodes = 1;
+Node *counter = head;
+if(counter == NULL){
+    numberNodes = 0;
+    return numberNodes;
+}
+else{
+    while(counter->next != NULL){
+          counter = counter->next;
+          numberNodes++;
+    }
+    return numberNodes;
+}
 
 }
-int main(){
 
+int main(){
+insert(4,1);
+insertStart(5);
+insertStart(3);
+insertBack(15);
+insertBack(8);
+Display();
+cout<<"\ncount = "<<Count();
 Delete();
+
     return 0;
 }
