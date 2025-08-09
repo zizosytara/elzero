@@ -112,12 +112,33 @@ void Delete(int position){
 }
 
 void Reverse(){
-    
+      Node *current = head ;
+      Node *temp = NULL;
+      while(current != NULL){
+            temp = current->prev;
+            current->prev = current->next;
+            current->next = temp;
+            current = current->prev;
+      }
+      if(temp != NULL){
+         head = temp->prev;
+      }
 }
-void Reverse(int i){
-    
+void Reverse(Node *current){
+      if(current->next == NULL){
+         head = current;
+         return;
+      }
+
+      Reverse(current->next);
+      Node *temp = current->next;
+      current->next = current->prev;
+      current->prev = temp;
+
+      
 }
 void Display(){
+    cout<<endl;
     Node *current = head;
     while(current != NULL){
         cout<<current->data<<'\t';
@@ -151,6 +172,8 @@ insertBack(15);
 insertBack(8);
 Display();
 cout<<"\ncount = "<<Count();
+Reverse(head);
+Display();
 Delete();
 
     return 0;
