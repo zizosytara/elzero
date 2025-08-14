@@ -23,7 +23,8 @@
                 "elzero.exe",
                 "snakeGame.exe",
                 "temporary.exe",
-                "stackArray.exe"
+                "stackArray.exe",
+                "stackList.exe",
             ]
         }
     ]
