@@ -86,79 +86,58 @@ class Stack{
              cout<<"NULL\n";
            }
 };
-class Reverse_String_Stack {
-    protected:
-        static const int MAX_SIZE = 101;
-        char A[MAX_SIZE];
-        int top = -1;
-    public:
-        void Push(int x){
-            if(top == MAX_SIZE-1){
-                cout<<"Stack overflow.\n";
-                return;
-            } 
-            A[++top] = x;    
+class Reverse_String_Stack{
+private:
+    char str[101];
+public:
+    void _strcpy(char* dest,char* src){
+         int i =0;
+         while(src[i] != '\0'){
+             dest[i] = src[i];
+             i++;
+         }
+         dest[i] = '\0';
+     }
+    int _strlen(const char* s){
+        int len = 0;
+        while(s[len] != '\0'){
+            len++;
         }
-        void Pop(){
-            if(top == -1){
-                cout<<"Stack is empty.\n";
-                return;
-            }
-            top--;
-        }
-        int Top(){
-            return A[top];
-        }
-        bool IsEmpty(){
-            if(Top() == 0){
-            return true;
-        }
+        return len;
+     }
+    void _swap(char& a, char& b){
+        char temp = a;
+        a = b;
+        b = temp;
     }
-    void Reverse(char c[],int n){
-        Reverse_String_Stack s;
-        for(int i=0; i<n; i++){
-            s.Push(c[i]);
-        }
-        for(int i=0 ;i<n ;i++){
-            c[i] = s.Top();
-            s.Pop();
+    void setStr(char* s){
+        _strcpy(str, s);
+    }
+    void Reverse(){
+        int n = _strlen(str);
+        for(int i = 0 ; i < n/2 ; i++){
+            _swap(str[i], str[n - i - 1]);
         }
     }
     void Print(){
-        for(int i = 0; i <= top; i++){
-            printf("[%d] -> ",A[i]);
-        }
-        printf("NULL\n");
+        cout<< str << endl; 
     }
 };
+
+
 int main(){
    cout<<"\033[34m";
    Stack s;
    Heap h;
    Reverse_String_Stack rss;
-   h.Push(10);
-   h.Push(30);
-   h.Push(40);
-   h.Print();
-   h.Pop();
-   h.Pop();
-   h.Print();
-   cout<<"---------"<<endl;
-   s.Push(10);
-   s.Push(30);
-   s.Push(40);
-   s.Print();
-   s.Pop();
-   s.Pop();
-   s.Print();
-   cout<<"---------"<<endl;
-   rss.Push(10);
-   rss.Push(30);
-   rss.Push(40);
+//-------------------------------//
+   char input[101];
+   cout<<"Enter the String to reverse : "<<endl;
+   cin>>input;
+   rss.setStr(input);
+   rss.Reverse();
    rss.Print();
-   rss.Pop();
-   rss.Pop();
-   rss.Print();
+   
    cout<<"\033[0m";
 
     return 0;

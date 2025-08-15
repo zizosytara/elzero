@@ -1,10 +1,13 @@
 #include <iostream>
+#include<vector>
 using namespace std;
 #define MAX_SIZE 101
 class Stack{
 private:
     int A[MAX_SIZE];
     int top = -1;
+    vector<int>n;
+    
 
 public:
     void Push(int x)

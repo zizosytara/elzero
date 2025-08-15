@@ -12,6 +12,8 @@
         "variant": "cpp",
         "string_view": "cpp",
         "istream": "cpp",
-        "streambuf": "cpp"
+        "streambuf": "cpp",
+        "vector": "cpp",
+        "deque": "cpp"
     }
 }
